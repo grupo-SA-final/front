@@ -18,7 +18,8 @@
   padding: 0 1rem;
 }
 
-.contato-info-card,
+.contato-info-card, 
+
 .contato-form-card {
   flex: 1 1 400px;
   padding: 2rem;
