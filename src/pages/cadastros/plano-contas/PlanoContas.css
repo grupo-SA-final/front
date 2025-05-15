@@ -1,0 +1,108 @@
+.plano-contas-container {
+  padding: 2rem;
+  min-height: calc(100vh - 64px);
+  background-color: var(--background-color);
+}
+
+.plano-contas-title {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.plano-contas-card {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-background);
+  transition: all 0.3s ease;
+}
+
+.plano-contas-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+.plano-contas-subtitle {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.plano-contas-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  width: 100%;
+}
+
+.plano-contas-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.plano-contas-input::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.plano-contas-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.plano-contas-button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  font-weight: 500;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: none;
+  transition: background-color 0.3s;
+}
+
+.plano-contas-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* Dark theme */
+[data-theme="dark"] .plano-contas-card {
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+[data-theme="dark"] .plano-contas-card:hover {
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+/* Light theme */
+[data-theme="light"] .plano-contas-card {
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+[data-theme="light"] .plano-contas-card:hover {
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .plano-contas-container {
+    padding: 1rem;
+  }
+
+  .plano-contas-card {
+    padding: 1.5rem;
+  }
+}
