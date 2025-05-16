@@ -43,8 +43,8 @@ const Contato = () => {
           </p>
           <div className="contato-info">
             <p className="contato-text"><strong>Email:</strong> contato@cashflow.com</p>
-            <p className="contato-text"><strong>Telefone:</strong> (11) 1234-5678</p>
-            <p className="contato-text"><strong>Endereço:</strong> Av. Paulista, 1000 - São Paulo, SP</p>
+            <p className="contato-text"><strong>Telefone:</strong> (48) 98493-8235</p>
+            <p className="contato-text"><strong>Endereço:</strong> SC-401. 3730, Saco Grande - Florianópolis/SC</p>
             <p className="contato-text"><strong>Atendimento:</strong> Segunda a Sexta, das 9h às 18h</p>
           </div>
         </div>
