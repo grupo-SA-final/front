@@ -43,9 +43,12 @@ const Contato = () => {
           </p>
           <div className="contato-info">
             <p className="contato-text"><strong>Email:</strong> contato@cashflow.com</p>
-            <p className="contato-text"><strong>Telefone:</strong> (48) 98493-8235</p>
             <p className="contato-text"><strong>Endereço:</strong> SC-401. 3730, Saco Grande - Florianópolis/SC</p>
             <p className="contato-text"><strong>Atendimento:</strong> Segunda a Sexta, das 9h às 18h</p>
+            <p className="contato-text"><strong>WhatsApp:</strong> (48) 98493-8235</p>
+            <div className='qr-container'>
+              <img src="../../../public/qr-code.png" className='qrcode' />
+            </div>            
           </div>
         </div>
 
