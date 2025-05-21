@@ -41,7 +41,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-link">
-          <img className="navbar-logo" src={"../../../public/logo-sem-nome.png"}></img>
+          <img className="navbar-logo" src={"../../../logo-sem-nome.png"}></img>
           <span className="navbar-title">CashFlow</span>
         </Link>
       </div>

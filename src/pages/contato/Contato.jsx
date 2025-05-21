@@ -47,7 +47,7 @@ const Contato = () => {
             <p className="contato-text"><strong>Atendimento:</strong> Segunda a Sexta, das 9h às 18h</p>
             <p className="contato-text"><strong>WhatsApp:</strong> (48) 98493-8235</p>
             <div className='qr-container'>
-              <img src="../../../public/qr-code.png" className='qrcode' />
+              <img src="../../../qr-code.png" className='qrcode' />
             </div>            
           </div>
         </div>
