@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import './Lancamento.css';
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { NumericFormat } from 'react-number-format';
+import pt from "date-fns/locale/pt";
+
+registerLocale("pt", pt);
+
 
 const Lancamento = () => {
   const [formData, setFormData] = useState({
@@ -39,36 +46,43 @@ const Lancamento = () => {
             onChange={handleChange}
             className="form-control"
           >
-            <option value="receita">Receita</option>
-            <option value="despesa">Despesa</option>
+            <option value="pagamento">Pagamento</option>
+            <option value="recebimento">Recebimento</option>
           </select>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="data">Data</label>
-          <input
-            type="date"
-            id="data"
-            name="data"
-            value={formData.data}
-            onChange={handleChange}
-            className="form-control"
-            required
-          />
-        </div>
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="data">Data</label>
+            <DatePicker
+              selected={formData.data}
+              onChange={(date) => setFormData({ ...formData, data: date })}
+              className="form-control"
+              dateFormat="dd/MM/yyyy"
+              placeholderText="dd/mm/aaaa"
+              locale="pt"
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="valor">Valor</label>
-          <input
-            type="number"
-            id="valor"
-            name="valor"
-            value={formData.valor}
-            onChange={handleChange}
-            className="form-control"
-            step="0.01"
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="valor">Valor</label>
+            <NumericFormat
+              id="valor"
+              name="valor"
+              value={formData.valor}
+              onValueChange={(values) => {
+                const { value } = values; 
+                setFormData({ ...formData, valor: value });
+              }}
+              thousandSeparator="."
+              decimalSeparator=","
+              decimalScale={2}
+              fixedDecimalScale
+              allowNegative={false}
+              className="form-control"
+              placeholder="0,00"
+            />
+          </div>
         </div>
 
         <div className="form-group">
