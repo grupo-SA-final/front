@@ -14,7 +14,6 @@ import Relatorio from './pages/relatorio/Relatorio';
 // Cadastro Pages
 import CentroCustos from './pages/cadastros/centro-custos/CentroCustos';
 import ContasBancarias from './pages/cadastros/contas-bancarias/ContasBancarias';
-import PlanoContas from './pages/cadastros/plano-contas/PlanoContas';
 import Receita from './pages/cadastros/receita/Receita';
 
 // Documentation Pages
@@ -47,7 +46,6 @@ function App() {
             <Route index element={<Home />} />
             <Route path="cadastros/centro-custos" element={<CentroCustos />} />
             <Route path="cadastros/contas-bancarias" element={<ContasBancarias />} />
-            <Route path="cadastros/plano-contas" element={<PlanoContas />} />
             <Route path="cadastros/receita" element={<Receita />} />
             <Route path="lancamento" element={<Lancamento />} />
             <Route path="relatorio" element={<Relatorio />} />

@@ -33,7 +33,6 @@ const Navbar = () => {
   const cadastrosItems = [
     { name: 'Centro de Custos', path: '/cadastros/centro-custos' },
     { name: 'Contas Bancárias', path: '/cadastros/contas-bancarias' },
-    { name: 'Plano de Contas', path: '/cadastros/plano-contas' },
     { name: 'Receita', path: '/cadastros/receita' },
   ];
 
