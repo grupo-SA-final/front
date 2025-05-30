@@ -1,33 +1,35 @@
 .centro-custos-container {
-  padding: 2rem;
+  padding: 2rem 0;
   min-height: calc(100vh - 64px);
   background-color: var(--background-color);
 }
 
 .centro-custos-title {
+  text-align: center;
   color: var(--text-color);
   margin-bottom: 2rem;
-  font-weight: 600;
 }
 
 .centro-custos-card {
+  max-width: 600px;
+  margin: 0 auto;
   padding: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  border-radius: 28px;
   background-color: var(--card-background);
-  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-speed);
 }
 
 .centro-custos-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px var(--shadow-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .centro-custos-subtitle {
   color: var(--text-color);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-weight: 500;
+  text-align: center;
 }
 
 .centro-custos-form {
@@ -36,24 +38,13 @@
   gap: 1rem;
 }
 
-.form-row {
-  width: 100%;
-}
-
 .centro-custos-input {
-  width: 100%;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: var(--text-color);
-  background-color: transparent;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  transition: border-color 0.2s ease;
-}
-
-.centro-custos-input::placeholder {
+  border-radius: 4px;
+  background-color: var(--input-background);
   color: var(--text-color);
-  opacity: 0.7;
+  font-size: 1rem;
 }
 
 .centro-custos-input:focus {
@@ -62,47 +53,22 @@
 }
 
 .centro-custos-button {
-  margin-top: 1rem;
   padding: 0.75rem 2rem;
-  font-weight: 500;
-  background-color: var(--primary-color);
-  color: white;
   border: none;
-  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
-  text-transform: none;
-  transition: background-color 0.3s;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
 .centro-custos-button:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-hover);
 }
 
-/* Dark theme */
-[data-theme="dark"] .centro-custos-card {
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-[data-theme="dark"] .centro-custos-card:hover {
-  box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-/* Light theme */
-[data-theme="light"] .centro-custos-card {
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-[data-theme="light"] .centro-custos-card:hover {
-  box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .centro-custos-container {
-    padding: 1rem;
-  }
-
+@media (max-width: 768px) {
   .centro-custos-card {
-    padding: 1.5rem;
+    margin: 0 1rem;
   }
 }
