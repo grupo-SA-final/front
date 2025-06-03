@@ -1,3 +1,4 @@
+/* CONTAINER PRINCIPAL */
 .lancamento-container {
   padding: 2rem 0;
   min-height: calc(80vh - 64px);
@@ -6,6 +7,7 @@
   margin: 0 auto;
 }
 
+/* CABEÇALHO */
 .lancamento-header {
   display: flex;
   justify-content: space-between;
@@ -18,6 +20,7 @@
   font-size: 2rem;
 }
 
+/* BOTÃO NOVO */
 .btn-novo {
   padding: 0.5rem 1rem;
   background-color: var(--primary-color);
@@ -33,6 +36,7 @@
   background-color: var(--primary-color-hover);
 }
 
+/* TABELA */
 .lancamento-tabela {
   width: 100%;
   border-collapse: collapse;
@@ -59,6 +63,11 @@
   border-bottom: none;
 }
 
+.lancamento-tabela tbody tr {
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
 .linha-vermelha {
   background-color: #ffe6e6;
   color: #a10000;
@@ -69,6 +78,7 @@
   color: #006600;
 }
 
+/* BOTÕES DE AÇÃO */
 .btn-acao {
   background: transparent;
   border: none;
@@ -76,89 +86,11 @@
   font-size: 1.1rem;
   margin-right: 0.5rem;
   transition: color 0.2s ease;
+  color: #000;
 }
 
 .btn-acao:hover {
   color: var(--primary-color);
-}
-
-/* Formulário */
-.lancamento-form {
-  background-color: var(--card-background);
-  padding: 1.5rem 2rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  color: var(--text-color);
-  max-width: 600px;
-  margin: 0 auto 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.form-control {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--input-background);
-  color: var(--text-color);
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-.form-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.form-row .form-group {
-  flex: 1;
-  min-width: 150px;
-}
-
-.submit-button {
-  padding: 0.75rem 1rem;
-  border: none;
-  background-color: var(--primary-color);
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: var(--primary-color-hover);
-}
-
-.btn-acao {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #000; 
-  transition: color 0.3s ease;
-  margin: 0 0.15rem;
-}
-
-.btn-acao:hover {
-  color: #4da6ff; 
 }
 
 .btn-acao.delete {
@@ -177,12 +109,129 @@
   color: #2980b9;
 }
 
+/* FORMULÁRIO PADRÃO */
+.lancamento-form {
+  background-color: var(--card-background);
+  color: var(--text-color);
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* FORMULÁRIO NO MODAL */
+.lancamento-form {
+  background-color: var(--card-background);
+  padding: 2rem;
+  color: var(--text-color);
+  max-width: 100%;
+  width: 100%;
+}
+
+/* GRUPOS DO FORMULÁRIO */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* INPUTS */
+.form-control {
+  padding: 0.65rem 0.9rem;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* FILAS DO FORMULÁRIO */
+.form-lanc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+.form-lanc .form-group {
+  flex: 1;
+  min-width: 48%;
+}
+
+/* BOTÕES SUBMIT E CANCELAR */
+.submit-button,
+.cancel-button {
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submit-button {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.submit-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  margin-left: 0.5rem;
+}
+
+.cancel-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* SELECTS */
+select.form-control {
+  appearance: none;
+}
+
 .lancamento-form select option {
   background-color: #2a2a2a;
   color: #eee;
 }
 
-.lancamento-tabela tbody tr {
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
+/* AJUSTES EXTRAS PARA SWEETALERT2 */
+.swal2-popup {
+  background-color: var(--card-background) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  padding: 0 !important;
+  color: var(--text-color) !important;
+  border: none !important;
+}
+
+.swal2-title {
+  color: var(--text-color) !important;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.swal2-html-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.swal2-close {
+  color: var(--text-color);
+  font-size: 1.2rem;
 }
