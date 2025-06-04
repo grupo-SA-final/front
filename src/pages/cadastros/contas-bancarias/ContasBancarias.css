@@ -89,6 +89,11 @@
   max-width: 100%;
 }
 
+.contas-bancarias-form select option{
+  background-color: var(--primary-color);
+  color: #eee;
+}
+
 .form-row-dupla {
   display: flex;
   gap: 1rem;
