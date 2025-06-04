@@ -29,20 +29,6 @@ const FormularioCentroCustos = ({ formData, setFormData, onSubmit, onCancel }) =
     </div>
 
     <div className="form-group">
-      <label>Código</label>
-      <input
-        type="text"
-        name="codigo"
-        value={formData.codigo}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, codigo: e.target.value }))
-        }
-        required
-        className="form-control"
-      />
-    </div>
-
-    <div className="form-group">
       <label>Descrição</label>
       <textarea
         name="descricao"
@@ -59,7 +45,7 @@ const FormularioCentroCustos = ({ formData, setFormData, onSubmit, onCancel }) =
       <button
         type="submit"
         className="submit-button"
-        disabled={!formData.nome || !formData.codigo}
+        disabled={!formData.nome}
       >
         Salvar Centro
       </button>
@@ -87,7 +73,6 @@ const CentroCustos = () => {
           const [localFormData, setLocalFormData] = React.useState(
             editarData || {
               nome: "",
-              codigo: "",
               descricao: "",
             }
           );

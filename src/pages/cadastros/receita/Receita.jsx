@@ -1,111 +1,174 @@
-import React, { useState } from 'react';
-import './Receita.css';
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import ReactDOM from "react-dom/client";
+import "./Receita.css";
+
+const MySwal = withReactContent(Swal);
+
+const FormularioReceita = ({ formData, setFormData, onSubmit, onCancel }) => (
+  <form
+    className="receita-form"
+    onSubmit={(e) => {
+      e.preventDefault();
+      onSubmit();
+    }}
+  >
+    <div className="form-group">
+      <label>Nome</label>
+      <input
+        type="text"
+        name="descricao"
+        value={formData.descricao}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, descricao: e.target.value }))
+        }
+        required
+        className="form-control"
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Descrição</label>
+      <textarea
+        name="observacoes"
+        value={formData.observacoes}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, observacoes: e.target.value }))
+        }
+        rows={4}
+        className="form-control"
+      />
+    </div>
+
+    <div className="form-buttons">
+      <button type="submit" className="submit-button">
+        Salvar
+      </button>
+      <button type="button" className="btn-cancel" onClick={onCancel}>
+        Cancelar
+      </button>
+    </div>
+  </form>
+);
 
 const Receita = () => {
-  const [formData, setFormData] = useState({
-    descricao: '',
-    valor: '',
-    data: '',
-    categoria: '',
-    observacoes: '',
-  });
+  const [receitas, setReceitas] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const abrirFormularioModal = (editarData = null, index = null) => {
+    const container = document.createElement("div");
+    MySwal.fire({
+      title: index !== null ? "Editar Receita" : "Nova Receita",
+      html: container,
+      showConfirmButton: false,
+      showCloseButton: true,
+      didOpen: () => {
+        function FormModal() {
+          const [localFormData, setLocalFormData] = useState(
+            editarData || {
+              descricao: "",
+              observacoes: "",
+            }
+          );
+
+          const handleSubmitLocal = () => {
+            if (index !== null) {
+              setReceitas((prev) => {
+                const novas = [...prev];
+                novas[index] = localFormData;
+                return novas;
+              });
+            } else {
+              setReceitas((prev) => [...prev, localFormData]);
+            }
+            Swal.close();
+          };
+
+          return (
+            <FormularioReceita
+              formData={localFormData}
+              setFormData={setLocalFormData}
+              onSubmit={handleSubmitLocal}
+              onCancel={() => Swal.close()}
+            />
+          );
+        }
+
+        ReactDOM.createRoot(container).render(<FormModal />);
+      },
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aqui você pode enviar para uma API ou salvar localmente
-    console.log('Receita cadastrada:', formData);
+  const handleEdit = (index) => {
+    abrirFormularioModal(receitas[index], index);
+  };
 
-    // Resetar o formulário após envio
-    setFormData({
-      descricao: '',
-      valor: '',
-      data: '',
-      categoria: '',
-      observacoes: '',
+  const handleDelete = (index) => {
+    Swal.fire({
+      title: "Confirma exclusão?",
+      text: "Esta ação não pode ser desfeita.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sim, excluir",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setReceitas((prev) => prev.filter((_, i) => i !== index));
+        Swal.fire("Excluído!", "Receita removida.", "success");
+      }
     });
   };
 
   return (
     <div className="receita-container">
-      <h1 className="receita-title">Cadastro de Receita</h1>
-
-      <div className="receita-card">
-        <h2 className="receita-subtitle">Nova Receita</h2>
-
-        <form className="receita-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <input
-              type="text"
-              name="descricao"
-              placeholder="Descrição"
-              className="receita-input"
-              value={formData.descricao}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-row">
-            <input
-              type="number"
-              name="valor"
-              placeholder="Valor"
-              className="receita-input"
-              value={formData.valor}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-row">
-            <input
-              type="date"
-              name="data"
-              className="receita-input"
-              value={formData.data}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-row">
-            <select
-              name="categoria"
-              className="receita-input"
-              value={formData.categoria}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Categoria</option>
-              <option value="salario">Salário</option>
-              <option value="investimentos">Investimentos</option>
-              <option value="outros">Outros</option>
-            </select>
-          </div>
-
-          <div className="form-row">
-            <textarea
-              name="observacoes"
-              placeholder="Observações"
-              rows="4"
-              className="receita-input"
-              value={formData.observacoes}
-              onChange={handleChange}
-            ></textarea>
-          </div>
-
-          <div className="form-row">
-            <button type="submit" className="receita-button">
-              Salvar
-            </button>
-          </div>
-        </form>
+      <div className="receita-header">
+        <h1>Receitas</h1>
+        <button className="btn-novo" onClick={() => abrirFormularioModal()}>
+          Nova Receita
+        </button>
       </div>
+
+      <table className="receita-tabela">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {receitas.length === 0 ? (
+            <tr>
+              <td colSpan={3} style={{ textAlign: "center", color: "#777" }}>
+                Nenhuma receita cadastrada
+              </td>
+            </tr>
+          ) : (
+            receitas.map((r, i) => (
+              <tr key={i}>
+                <td>{r.descricao}</td>
+                <td>{r.observacoes}</td>
+                <td>
+                  <button
+                    onClick={() => handleEdit(i)}
+                    className="btn-acao edit"
+                    title="Editar"
+                  >
+                    🖉
+                  </button>
+                  <button
+                    onClick={() => handleDelete(i)}
+                    className="btn-acao delete"
+                    title="Excluir"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };
