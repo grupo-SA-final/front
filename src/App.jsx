@@ -24,6 +24,8 @@ import Contato from './pages/contato/Contato';
 
 import Usuario from './pages/usuario/Usuario';
 
+import Login from './pages/login/Login';
+
 // Theme configuration
 const theme = createTheme({
   palette: {
@@ -55,6 +57,7 @@ function App() {
             <Route path="termos-servico" element={<TermosServico />} />
             <Route path="contato" element={<Contato />} />
             <Route path="usuario" element={<Usuario />} />
+            <Route path="login" element={<Login />} />
           </Route>
         </Routes>
       </Router>
