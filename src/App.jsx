@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -14,7 +14,6 @@ import Relatorio from './pages/relatorio/Relatorio';
 // Cadastro Pages
 import CentroCustos from './pages/cadastros/centro-custos/CentroCustos';
 import ContasBancarias from './pages/cadastros/contas-bancarias/ContasBancarias';
-import PlanoContas from './pages/cadastros/plano-contas/PlanoContas';
 import Receita from './pages/cadastros/receita/Receita';
 
 // Documentation Pages
@@ -23,6 +22,7 @@ import TermosServico from './pages/termos-servico/TermosServico';
 import Contato from './pages/contato/Contato';
 
 import Usuario from './pages/usuario/Usuario';
+import HomeDeslogada from './pages/home/HomeDeslogada';
 
 import Login from './pages/login/Login';
 
@@ -40,16 +40,25 @@ const theme = createTheme({
 });
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  useEffect(() => {
+    // Atualiza o estado se o token mudar (ex: logout em outra aba)
+    const onStorage = () => setIsLoggedIn(!!localStorage.getItem('token'));
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/login" element={<HomeDeslogada onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="/" element={isLoggedIn ? <MainLayout /> : <Navigate to="/login" replace />}>
             <Route index element={<Home />} />
             <Route path="cadastros/centro-custos" element={<CentroCustos />} />
             <Route path="cadastros/contas-bancarias" element={<ContasBancarias />} />
-            <Route path="cadastros/plano-contas" element={<PlanoContas />} />
             <Route path="cadastros/receita" element={<Receita />} />
             <Route path="lancamento" element={<Lancamento />} />
             <Route path="relatorio" element={<Relatorio />} />

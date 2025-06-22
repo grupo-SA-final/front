@@ -17,6 +17,11 @@ const Navbar = () => {
     document.documentElement.setAttribute('data-theme', !darkMode ? 'dark' : 'light');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,7 +38,6 @@ const Navbar = () => {
   const cadastrosItems = [
     { name: 'Centro de Custos', path: '/cadastros/centro-custos' },
     { name: 'Contas Bancárias', path: '/cadastros/contas-bancarias' },
-    { name: 'Plano de Contas', path: '/cadastros/plano-contas' },
     { name: 'Receita', path: '/cadastros/receita' },
   ];
 
@@ -41,7 +45,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-link">
-          <span className="navbar-title">Finanças App</span>
+          <img className="navbar-logo" src={"../../../logo-sem-nome.png"}></img>
+          <span className="navbar-title">CashFlow</span>
         </Link>
       </div>
 
@@ -93,7 +98,7 @@ const Navbar = () => {
         <Link to="/usuario" className="navbar-icon">
           <span className="icon-text">Usuário</span>
         </Link>
-        <button className="navbar-icon">
+        <button className="navbar-icon" onClick={handleLogout}>
           <span className="icon-text">Sair</span>
         </button>
       </div>

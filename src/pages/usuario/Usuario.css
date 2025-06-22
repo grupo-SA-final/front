@@ -1,10 +1,23 @@
+/* Container geral do perfil do usuário */
 .usuario-container {
   padding: 2rem 0;
+  min-height: calc(100vh - 64px);
+  background-color: var(--background-color);
+}
+
+.usuario-title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
 }
 
 .usuario-card {
+  max-width: 600px;
+  margin: 0 auto;
   padding: 2rem;
-  margin-bottom: 1.5rem;
+  border-radius: 28px;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
   transition: all var(--transition-speed);
 }
 
@@ -13,21 +26,157 @@
   box-shadow: 0 4px 8px var(--shadow-color);
 }
 
-.usuario-title {
-  color: var(--text-color);
-  margin-bottom: 2rem;
-}
-
 .usuario-text {
   color: var(--text-color);
+  margin-bottom: 1rem;
 }
 
-[data-theme="dark"] .usuario-card {
-  background-color: var(--card-background);
-  border: 1px solid var(--border-color);
+.usuario-form .form-usuario-row {
+  display: flex;
+  gap: 1rem;
+  flex: 1 1 100%; 
 }
 
-[data-theme="light"] .usuario-card {
-  background-color: var(--card-background);
+.usuario-form .form-usuario-row .form-group {
+  flex: 1;
+  min-width: 0; 
+}
+
+.usuario-form {
+  display: flex;    
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.usuario-input {
+  padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.usuario-input-doc {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  width: 259px;
+}
+
+.usuario-input-date {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-left: 26px;
+} 
+
+.usuario-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.usuario-button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.usuario-submit-button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.usuario-submit-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.usuario-link-button {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.usuario-link-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Estilo específico para o modal SweetAlert2 */
+
+.swal2-popup-custom {
+  padding: 2rem !important;
+  width: 420px !important;
+  max-width: 90vw !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 12px !important;
+}
+
+/* Dentro do modal, reaproveitar classes do form para inputs e botões */
+.swal2-popup-custom .usuario-form {
+  width: 100%;
+}
+
+/* Ajuste de inputs dentro do modal */
+.swal2-popup-custom .usuario-input {
+  margin-bottom: 1rem;
+}
+
+/* Botões dentro do modal ficam alinhados à direita */
+.swal2-popup-custom .usuario-button-group {
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Mensagem de erro */
+.swal2-popup-custom p {
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Para o DatePicker — deixa o calendário mais suave */
+.react-datepicker {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+}
+
+.react-datepicker__header {
+  background-color: #2a86ff;
+  color: white;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #2a86ff !important;
+  color: white !important;
 }

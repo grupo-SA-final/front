@@ -1,59 +1,149 @@
 .contas-bancarias-container {
-  padding: 2rem;
-  min-height: calc(100vh - 64px);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
   background-color: var(--background-color);
+  min-height: calc(80vh - 64px);
+  color: var(--text-color);
 }
 
-.contas-bancarias-title {
-  color: var(--text-color);
+.contas-bancarias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
+}
+
+.contas-bancarias-header h1 {
+  font-size: 2rem;
+}
+
+.btn-novo {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  color: white;
   font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.contas-bancarias-card {
-  padding: 2rem;
-  margin-bottom: 2rem;
+.btn-novo:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.contas-bancarias-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 5px var(--shadow-color);
   border-radius: 8px;
-  border: 1px solid var(--border-color);
+  overflow: hidden;
   background-color: var(--card-background);
-  transition: all 0.3s ease;
-}
-
-.contas-bancarias-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-.contas-bancarias-subtitle {
   color: var(--text-color);
-  margin-bottom: 2rem;
-  font-weight: 500;
 }
+
+.contas-bancarias-tabela thead {
+  background-color: var(--card-background-dark);
+}
+
+.contas-bancarias-tabela th,
+.contas-bancarias-tabela td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1rem;
+  text-align: left;
+}
+
+.contas-bancarias-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.btn-acao {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: var(--text-color);
+}
+
+.btn-acao.edit:hover {
+  color: #2980b9;
+}
+
+.btn-acao.delete:hover {
+  color: #ff3b3b;
+}
+
+/* Formulário dentro do modal */
 
 .contas-bancarias-form {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-width: 100%;
+}
+
+.contas-bancarias-form select option{
+  background-color: var(--primary-color);
+  color: #eee;
+}
+
+.form-row-dupla {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row-dupla .form-row {
+  flex: 1;
+  min-width: 150px;
+}
+
+.swal2-popup {
+  width: 90vw !important; /* largura relativa */
+  max-width: 620px !important; /* limite max */
+  max-height: 80vh !important; /* altura máxima */
+  overflow-y: auto !important; /* permite scroll interno */
+  padding: 0.5rem 1.5rem !important;
+  box-sizing: border-box;
 }
 
 .form-row {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
 }
 
 .contas-bancarias-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: var(--text-color);
-  background-color: transparent;
-  border: 1px solid var(--border-color);
+  padding: 0.6rem 0.9rem;
   border-radius: 6px;
-  transition: border-color 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
-.contas-bancarias-input::placeholder {
-  color: var(--text-color);
-  opacity: 0.7;
+.contas-bancarias-desc {
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-background);
+  color: var(--text-color); 
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  max-width: 508px;
 }
 
 .contas-bancarias-input:focus {
@@ -61,48 +151,45 @@
   border-color: var(--primary-color);
 }
 
-.contas-bancarias-button {
+.form-buttons {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  gap: 1rem;
   margin-top: 1rem;
-  padding: 0.75rem 2rem;
-  font-weight: 500;
+}
+
+.contas-bancarias-button {
   background-color: var(--primary-color);
-  color: white;
   border: none;
+  padding: 0.7rem 1.3rem;
+  color: white;
+  font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  text-transform: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-.contas-bancarias-button:hover {
-  background-color: var(--primary-color-dark);
+.contas-bancarias-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
 }
 
-/* Dark theme */
-[data-theme="dark"] .contas-bancarias-card {
-  box-shadow: 0 2px 8px var(--shadow-color);
+.contas-bancarias-button:hover:not(:disabled) {
+  background-color: var(--primary-color-hover);
 }
 
-[data-theme="dark"] .contas-bancarias-card:hover {
-  box-shadow: 0 4px 20px var(--shadow-color);
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  padding: 0.7rem 1.3rem;
+  color: var(--text-color);
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Light theme */
-[data-theme="light"] .contas-bancarias-card {
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-[data-theme="light"] .contas-bancarias-card:hover {
-  box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .contas-bancarias-container {
-    padding: 1rem;
-  }
-
-  .contas-bancarias-card {
-    padding: 1.5rem;
-  }
+.btn-cancel:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }

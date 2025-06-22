@@ -74,7 +74,7 @@
 
 .politica-content {
   background: var(--card-background);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-sm);
   width: 100%;

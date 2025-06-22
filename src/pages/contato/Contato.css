@@ -3,11 +3,22 @@
   min-height: calc(100vh - 64px);
   background-color: var(--background-color);
 }
+.qr-container{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+} 
 
 .contato-title {
   text-align: center;
   color: var(--text-color);
   margin-bottom: 2rem;
+}
+
+.qrcode{
+  width: 110px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .contato-grid {
@@ -22,6 +33,7 @@
 .contato-form-card {
   flex: 1 1 400px;
   padding: 2rem;
+  border-radius: 28px;
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
   transition: all var(--transition-speed);
