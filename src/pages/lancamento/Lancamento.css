@@ -102,11 +102,14 @@
 }
 
 .btn-acao.edit {
-  color: #5dade2;
+  color: #222 !important;
+  font-weight: bold;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #000);
 }
 
 .btn-acao.edit:hover {
-  color: #2980b9;
+  color: #000 !important;
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #000);
 }
 
 /* FORMULÁRIO PADRÃO */
