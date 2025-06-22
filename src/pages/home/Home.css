@@ -210,4 +210,138 @@
     max-width: 95vw;
     font-size: 1.1rem;
   }
+}
+
+/* Estilos para a nova HomeDeslogada */
+.home-deslogada-container {
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.home-deslogada-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.home-deslogada-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  margin-bottom: 5rem;
+  min-height: 340px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #0001;
+  padding: 3.5rem 3rem;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-content {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: #555;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.hero-image {
+  flex: 0.8;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #0001;
+  margin-bottom: 0;
+}
+
+.home-deslogada-features {
+  text-align: center;
+  padding: 3rem 0;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.features-title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  padding: 1rem;
+}
+
+.feature-icon {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .home-deslogada-hero {
+    flex-direction: column;
+    text-align: center;
+    min-height: unset;
+    padding: 2rem 1rem;
+    max-width: 98vw;
+  }
+  .hero-image img {
+    margin-bottom: 2rem;
+    max-width: 160px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
 } 
