@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import './Relatorio.css';
 // import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'; // Descomente após instalar recharts
@@ -31,7 +31,6 @@ const Relatorio = () => {
   const [receitas, setReceitas] = useState([]);
 
   // Dados do relatório
-  const [resumo, setResumo] = useState({ receitas: 0, despesas: 0, saldo: 0 });
   const [lancamentos, setLancamentos] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -71,39 +70,35 @@ const Relatorio = () => {
     fetchLancamentos();
   }, []);
 
-  // Filtro 100% front-end
-  const lancamentosFiltrados = lancamentos.filter(l => {
-    // Filtro data
-    let passa = true;
-    if (periodoDe) {
-      const dataLanc = l.data ? l.data.split('T')[0] : '';
-      passa = passa && dataLanc >= periodoDe;
-    }
-    if (periodoAte) {
-      const dataLanc = l.data ? l.data.split('T')[0] : '';
-      passa = passa && dataLanc <= periodoAte;
-    }
-    // Filtro tipo
-    if (tipo) passa = passa && l.tipo === tipo;
-    // Filtro conta
-    if (conta) passa = passa && String(l.contaBancariaId) === String(conta);
-    // Filtro centro de custo
-    if (centro) passa = passa && String(l.centroDeCustoId) === String(centro);
-    // Filtro receita
-    if (receita) passa = passa && String(l.receitaId) === String(receita);
-    // Filtro busca descrição
-    if (busca) passa = passa && l.descricao && l.descricao.toLowerCase().includes(busca.toLowerCase());
-    return passa;
-  });
+  // Filtro 100% front-end OTIMIZADO com useMemo
+  const lancamentosFiltrados = useMemo(() => {
+    return lancamentos.filter(l => {
+      let passa = true;
+      if (periodoDe) {
+        const dataLanc = l.data ? l.data.split('T')[0] : '';
+        passa = passa && dataLanc >= periodoDe;
+      }
+      if (periodoAte) {
+        const dataLanc = l.data ? l.data.split('T')[0] : '';
+        passa = passa && dataLanc <= periodoAte;
+      }
+      if (tipo) passa = passa && l.tipo === tipo;
+      if (conta) passa = passa && String(l.contaBancariaId) === String(conta);
+      if (centro) passa = passa && String(l.centroDeCustoId) === String(centro);
+      if (receita) passa = passa && String(l.receitaId) === String(receita);
+      if (busca) passa = passa && l.descricao && l.descricao.toLowerCase().includes(busca.toLowerCase());
+      return passa;
+    });
+  }, [lancamentos, periodoDe, periodoAte, tipo, conta, centro, receita, busca]);
 
-  // Calcular resumo com base nos filtrados
-  useEffect(() => {
+  // Calcular resumo diretamente (sem useEffect para evitar loops)
+  const resumo = useMemo(() => {
     let receitas = 0, despesas = 0;
     lancamentosFiltrados.forEach(l => {
       if (l.tipo === 'recebimento') receitas += Number(l.valor);
       if (l.tipo === 'pagamento') despesas += Number(l.valor);
     });
-    setResumo({ receitas, despesas, saldo: receitas - despesas });
+    return { receitas, despesas, saldo: receitas - despesas };
   }, [lancamentosFiltrados]);
 
   // Exportar CSV
