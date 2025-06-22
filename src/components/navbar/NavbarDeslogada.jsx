@@ -85,7 +85,6 @@ const CadastroForm = ({ onClose }) => {
 
 const NavbarDeslogada = ({ onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ email: '', senha: '' });
-  const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -95,7 +94,6 @@ const NavbarDeslogada = ({ onLoginSuccess }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErro('');
     setLoading(true);
     try {
       const response = await fetch('/api/auth/login', {
@@ -108,7 +106,12 @@ const NavbarDeslogada = ({ onLoginSuccess }) => {
       });
       const data = await response.json();
       if (!response.ok) {
-        setErro(data.message || (data.errors && data.errors[0]?.msg) || 'Email ou senha inválidos.');
+        MySwal.fire({
+          icon: 'error',
+          title: 'Erro no Login',
+          text: data.message || (data.errors && data.errors[0]?.msg) || 'Email ou senha inválidos.',
+          confirmButtonColor: 'var(--primary-color)',
+        });
         setLoading(false);
         return;
       }
@@ -121,7 +124,12 @@ const NavbarDeslogada = ({ onLoginSuccess }) => {
       }
       onLoginSuccess();
     } catch (err) {
-      setErro('Erro de conexão com o servidor.');
+      MySwal.fire({
+        icon: 'error',
+        title: 'Erro de Conexão',
+        text: 'Não foi possível conectar ao servidor. Tente novamente mais tarde.',
+        confirmButtonColor: 'var(--primary-color)',
+      });
     } finally {
       setLoading(false);
     }
@@ -177,7 +185,6 @@ const NavbarDeslogada = ({ onLoginSuccess }) => {
           Cadastro
         </button>
       </form>
-      {erro && <span style={{ color: 'red', marginLeft: 16 }}>{erro}</span>}
     </nav>
   );
 };
