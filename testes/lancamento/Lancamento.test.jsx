@@ -24,47 +24,54 @@ describe('Lancamento', () => {
         <Lancamento />
       </MemoryRouter>
     );
-    expect(await screen.findByText('Receita 1')).toBeInTheDocument();
-    expect(screen.getByText('Despesa 1')).toBeInTheDocument();
+    expect(await screen.findByText('Venda')).toBeInTheDocument();
+    expect(screen.getByText('Compra')).toBeInTheDocument();
+    expect(screen.getByText('Despesa Fixa')).toBeInTheDocument();
   });
 
-  it('deve exibir botão de novo lançamento', () => {
+  it('deve cadastrar novo lançamento', async () => {
     render(
       <MemoryRouter initialEntries={["/lancamento"]}>
         <Lancamento />
       </MemoryRouter>
     );
-    expect(screen.getByRole('button', { name: /novo lançamento/i })).toBeInTheDocument();
-  });
-
-  it('deve exibir botões de ação na tabela', async () => {
-    render(
-      <MemoryRouter initialEntries={["/lancamento"]}>
-        <Lancamento />
-      </MemoryRouter>
-    );
+    fireEvent.click(screen.getByRole('button', { name: /novo lançamento/i }));
+    fireEvent.change(screen.getByLabelText(/descrição/i), { target: { value: 'Recebimento Extra' } });
+    fireEvent.change(screen.getByLabelText(/valor/i), { target: { value: '1500' } });
+    fireEvent.change(screen.getByLabelText(/tipo/i), { target: { value: 'recebimento' } });
+    fireEvent.change(screen.getByLabelText(/conta bancária/i), { target: { value: 'Banco XPTO' } });
+    fireEvent.change(screen.getByLabelText(/receita/i), { target: { value: 'Salário' } });
+    fireEvent.change(screen.getByLabelText(/data/i), { target: { value: '2024-01-15' } });
+    fireEvent.click(screen.getByRole('button', { name: /salvar lançamento/i }));
     await waitFor(() => {
-      const editButtons = screen.getAllByTitle('Editar');
-      const deleteButtons = screen.getAllByTitle('Excluir');
-      const markAsPaidButtons = screen.getAllByTitle('Marcar como Pago');
-      expect(editButtons.length).toBeGreaterThan(0);
-      expect(deleteButtons.length).toBeGreaterThan(0);
-      expect(markAsPaidButtons.length).toBeGreaterThan(0);
+      expect(screen.getByText(/lançamento cadastrado com sucesso/i)).toBeInTheDocument();
     });
   });
 
-  it('deve exibir cabeçalho da tabela', async () => {
+  it('deve editar um lançamento', async () => {
     render(
       <MemoryRouter initialEntries={["/lancamento"]}>
         <Lancamento />
       </MemoryRouter>
     );
-    expect(screen.getByText('Descrição')).toBeInTheDocument();
-    expect(screen.getByText('Tipo')).toBeInTheDocument();
-    expect(screen.getByText('Conta')).toBeInTheDocument();
-    expect(screen.getByText('Valor')).toBeInTheDocument();
-    expect(screen.getByText('Status')).toBeInTheDocument();
-    expect(screen.getByText('Data')).toBeInTheDocument();
-    expect(screen.getByText('Ações')).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('edit-lancamento-2'));
+    fireEvent.change(screen.getByLabelText(/descrição/i), { target: { value: 'Compra de Material' } });
+    fireEvent.click(screen.getByRole('button', { name: /salvar lançamento/i }));
+    await waitFor(() => {
+      expect(screen.getByText(/lançamento atualizado com sucesso/i)).toBeInTheDocument();
+    });
+  });
+
+  it('deve excluir um lançamento', async () => {
+    render(
+      <MemoryRouter initialEntries={["/lancamento"]}>
+        <Lancamento />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByTestId('delete-lancamento-3'));
+    fireEvent.click(screen.getByRole('button', { name: /confirmar/i }));
+    await waitFor(() => {
+      expect(screen.getByText(/lançamento excluído com sucesso/i)).toBeInTheDocument();
+    });
   });
 }); 

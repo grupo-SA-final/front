@@ -33,10 +33,8 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    const receitasElements = await screen.findAllByText(/Receitas/i);
-    expect(receitasElements[0]).toBeInTheDocument();
-    const despesasElements = screen.getAllByText(/Despesas/i);
-    expect(despesasElements[0]).toBeInTheDocument();
+    expect(await screen.findByText(/Receitas/i)).toBeInTheDocument();
+    expect(screen.getByText(/Despesas/i)).toBeInTheDocument();
     expect(screen.getByText(/Saldo/i)).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
   });
@@ -47,10 +45,10 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    const selects = screen.getAllByRole('combobox');
-    const selectTipo = selects[0];
+    const selectTipo = await screen.findByLabelText(/tipo/i);
     fireEvent.change(selectTipo, { target: { value: 'recebimento' } });
-    expect(selectTipo.value).toBe('recebimento');
+    expect(screen.getByText('Receita 1')).toBeInTheDocument();
+    expect(screen.queryByText('Despesa 1')).not.toBeInTheDocument();
   });
 
   it('deve filtrar lançamentos por período', async () => {
@@ -59,15 +57,12 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    const inputs = screen.getAllByRole('textbox');
-    if (inputs.length >= 2) {
-      const inputDe = inputs[0];
-      const inputAte = inputs[1];
-      fireEvent.change(inputDe, { target: { value: '2024-01-01' } });
-      fireEvent.change(inputAte, { target: { value: '2024-01-31' } });
-      expect(inputDe.value).toBe('2024-01-01');
-      expect(inputAte.value).toBe('2024-01-31');
-    }
+    const inputDe = await screen.findByLabelText(/^De$/i);
+    const inputAte = await screen.findByLabelText(/^Até$/i);
+    fireEvent.change(inputDe, { target: { value: '2024-01-01' } });
+    fireEvent.change(inputAte, { target: { value: '2024-01-31' } });
+    expect(screen.getByText('Receita 1')).toBeInTheDocument();
+    expect(screen.getByText('Despesa 1')).toBeInTheDocument();
   });
 
   it('deve exportar CSV ao clicar no botão', async () => {
