@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -22,6 +22,7 @@ import TermosServico from './pages/termos-servico/TermosServico';
 import Contato from './pages/contato/Contato';
 
 import Usuario from './pages/usuario/Usuario';
+import HomeDeslogada from './pages/home/HomeDeslogada';
 
 // Theme configuration
 const theme = createTheme({
@@ -37,12 +38,22 @@ const theme = createTheme({
 });
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  useEffect(() => {
+    // Atualiza o estado se o token mudar (ex: logout em outra aba)
+    const onStorage = () => setIsLoggedIn(!!localStorage.getItem('token'));
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/login" element={<HomeDeslogada onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="/" element={isLoggedIn ? <MainLayout /> : <Navigate to="/login" replace />}>
             <Route index element={<Home />} />
             <Route path="cadastros/centro-custos" element={<CentroCustos />} />
             <Route path="cadastros/contas-bancarias" element={<ContasBancarias />} />

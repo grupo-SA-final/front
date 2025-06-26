@@ -17,6 +17,11 @@ const Navbar = () => {
     document.documentElement.setAttribute('data-theme', !darkMode ? 'dark' : 'light');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -93,7 +98,7 @@ const Navbar = () => {
         <Link to="/usuario" className="navbar-icon">
           <span className="icon-text">Usuário</span>
         </Link>
-        <button className="navbar-icon">
+        <button className="navbar-icon" onClick={handleLogout}>
           <span className="icon-text">Sair</span>
         </button>
       </div>
