@@ -74,6 +74,49 @@ Os arquivos finais estarão em `/dist`.
 - O frontend consome a API REST do backend (ver README do back para endpoints)
 - Para funcionamento completo, o backend deve estar rodando
 
+## 🏗️ Estrutura do Projeto
+
+```
+src/
+├── App.jsx              # Componente principal e rotas
+├── main.jsx             # Ponto de entrada da aplicação
+├── index.css            # Estilos globais
+├── App.css              # Estilos do App
+├── layouts/
+│   └── MainLayout.jsx   # Layout principal
+├── components/
+│   ├── navbar/
+│   │   ├── Navbar.jsx
+│   │   ├── NavbarDeslogada.jsx
+│   │   └── Navbar.css
+│   └── footer/
+│       ├── Footer.jsx
+│       └── Footer.css
+├── pages/
+│   ├── home/
+│   │   ├── Home.jsx
+│   │   └── HomeDeslogada.jsx
+│   ├── usuario/
+│   │   └── Usuario.jsx
+│   ├── lancamento/
+│   │   └── Lancamento.jsx
+│   ├── relatorio/
+│   │   └── Relatorio.jsx
+│   ├── contato/
+│   │   └── Contato.jsx
+│   ├── termos-servico/
+│   │   └── TermosServico.jsx
+│   ├── politica-privacidade/
+│   │   └── PoliticaPrivacidade.jsx
+│   └── cadastros/
+│       ├── receita/
+│       │   └── Receita.jsx
+│       ├── contas-bancarias/
+│       │   └── ContasBancarias.jsx
+│       └── centro-custos/
+│           └── CentroCustos.jsx
+```
+
 ---
 
 Modern frontend for the financial system, built with React + Vite, providing an intuitive interface for managing users, cost centers, revenues, bank accounts, and transactions.

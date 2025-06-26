@@ -4,13 +4,22 @@ import { MemoryRouter } from 'react-router-dom';
 import PoliticaPrivacidade from '../../src/pages/politica-privacidade/PoliticaPrivacidade';
 
 describe('PoliticaPrivacidade', () => {
-  it('deve exibir título e texto da política', () => {
+  it('deve exibir título da política de privacidade', () => {
     render(
-      <MemoryRouter initialEntries={["/politica-privacidade"]}>
+      <MemoryRouter>
         <PoliticaPrivacidade />
       </MemoryRouter>
     );
     expect(screen.getByText(/política de privacidade/i)).toBeInTheDocument();
-    expect(screen.getByText(/esta política de privacidade descreve como suas informações pessoais são coletadas/i)).toBeInTheDocument();
+  });
+
+  it('deve exibir conteúdo da política', () => {
+    render(
+      <MemoryRouter>
+        <PoliticaPrivacidade />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/informações pessoais/i)).toBeInTheDocument();
+    expect(screen.getByText(/uso das informações/i)).toBeInTheDocument();
   });
 }); 

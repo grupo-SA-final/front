@@ -1,10 +1,27 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import NavbarDeslogada from '../../src/components/navbar/NavbarDeslogada';
 
 describe('NavbarDeslogada', () => {
-  it('deve exibir botões Entrar e Cadastrar', () => {
-    render(<NavbarDeslogada onLoginSuccess={jest.fn()} />);
+  it('deve exibir logo e links de navegação', () => {
+    render(
+      <MemoryRouter>
+        <NavbarDeslogada />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/CashFlow/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /início/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /sobre/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /contato/i })).toBeInTheDocument();
+  });
+
+  it('deve exibir botões de login e cadastro', () => {
+    render(
+      <MemoryRouter>
+        <NavbarDeslogada />
+      </MemoryRouter>
+    );
     expect(screen.getByRole('button', { name: /entrar/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /cadastrar/i })).toBeInTheDocument();
   });

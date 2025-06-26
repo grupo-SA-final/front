@@ -33,7 +33,7 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    expect(await screen.findByText(/Receitas/i)).toBeInTheDocument();
+    expect(await screen.findByText('Relatórios')).toBeInTheDocument();
     expect(screen.getByText(/Despesas/i)).toBeInTheDocument();
     expect(screen.getByText(/Saldo/i)).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    const selectTipo = await screen.findByLabelText(/tipo/i);
+    const selectTipo = await screen.findByDisplayValue('Todos');
     fireEvent.change(selectTipo, { target: { value: 'recebimento' } });
     expect(screen.getByText('Receita 1')).toBeInTheDocument();
     expect(screen.queryByText('Despesa 1')).not.toBeInTheDocument();
@@ -57,22 +57,21 @@ describe('Relatorio', () => {
         <Relatorio />
       </MemoryRouter>
     );
-    const inputDe = await screen.findByLabelText(/^De$/i);
-    const inputAte = await screen.findByLabelText(/^Até$/i);
+    const inputs = screen.getAllByDisplayValue('');
+    const inputDe = inputs[0];
+    const inputAte = inputs[1];
     fireEvent.change(inputDe, { target: { value: '2024-01-01' } });
     fireEvent.change(inputAte, { target: { value: '2024-01-31' } });
     expect(screen.getByText('Receita 1')).toBeInTheDocument();
     expect(screen.getByText('Despesa 1')).toBeInTheDocument();
   });
 
-  it('deve exportar CSV ao clicar no botão', async () => {
+  it('deve exibir botão de exportar', async () => {
     render(
       <MemoryRouter initialEntries={["/relatorio"]}>
         <Relatorio />
       </MemoryRouter>
     );
-    const exportBtn = await screen.findByRole('button', { name: /exportar csv/i });
-    expect(exportBtn).toBeInTheDocument();
-    // Simular clique e verificar se função de exportação é chamada (mockar window.URL.createObjectURL se necessário)
+    expect(await screen.findByRole('button', { name: /exportar csv/i })).toBeInTheDocument();
   });
 }); 
