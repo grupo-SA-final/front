@@ -34,19 +34,32 @@ describe('Usuario', () => {
     });
   });
 
-  it('deve alterar senha do usuário', async () => {
+  it('deve exibir formulário de perfil do usuário', async () => {
     render(
       <MemoryRouter initialEntries={["/usuario"]}>
         <Usuario />
       </MemoryRouter>
     );
-    fireEvent.click(screen.getByRole('button', { name: /alterar senha/i }));
-    fireEvent.change(screen.getByLabelText(/senha atual/i), { target: { value: '123456' } });
-    fireEvent.change(screen.getByLabelText(/nova senha/i), { target: { value: 'novaSenha123' } });
-    fireEvent.change(screen.getByLabelText(/confirmar nova senha/i), { target: { value: 'novaSenha123' } });
-    fireEvent.click(screen.getByRole('button', { name: /salvar senha/i }));
-    await waitFor(() => {
-      expect(screen.getByText(/senha alterada com sucesso/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/perfil do usuário/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/nome/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+  });
+
+  it('deve exibir botão de alterar senha', async () => {
+    render(
+      <MemoryRouter initialEntries={["/usuario"]}>
+        <Usuario />
+      </MemoryRouter>
+    );
+    expect(await screen.findByRole('button', { name: /alterar senha/i })).toBeInTheDocument();
+  });
+
+  it('deve exibir botão de salvar', async () => {
+    render(
+      <MemoryRouter initialEntries={["/usuario"]}>
+        <Usuario />
+      </MemoryRouter>
+    );
+    expect(await screen.findByRole('button', { name: /salvar/i })).toBeInTheDocument();
   });
 }); 

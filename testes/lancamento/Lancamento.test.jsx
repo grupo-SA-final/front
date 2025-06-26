@@ -74,4 +74,44 @@ describe('Lancamento', () => {
       expect(screen.getByText(/lançamento excluído com sucesso/i)).toBeInTheDocument();
     });
   });
+
+  it('deve exibir botão de novo lançamento', () => {
+    render(
+      <MemoryRouter initialEntries={["/lancamento"]}>
+        <Lancamento />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('button', { name: /novo lançamento/i })).toBeInTheDocument();
+  });
+
+  it('deve exibir botões de ação na tabela', async () => {
+    render(
+      <MemoryRouter initialEntries={["/lancamento"]}>
+        <Lancamento />
+      </MemoryRouter>
+    );
+    await waitFor(() => {
+      const editButtons = screen.getAllByTitle('Editar');
+      const deleteButtons = screen.getAllByTitle('Excluir');
+      const markAsPaidButtons = screen.getAllByTitle('Marcar como Pago');
+      expect(editButtons.length).toBeGreaterThan(0);
+      expect(deleteButtons.length).toBeGreaterThan(0);
+      expect(markAsPaidButtons.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('deve exibir cabeçalho da tabela', async () => {
+    render(
+      <MemoryRouter initialEntries={["/lancamento"]}>
+        <Lancamento />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('Descrição')).toBeInTheDocument();
+    expect(screen.getByText('Tipo')).toBeInTheDocument();
+    expect(screen.getByText('Conta')).toBeInTheDocument();
+    expect(screen.getByText('Valor')).toBeInTheDocument();
+    expect(screen.getByText('Status')).toBeInTheDocument();
+    expect(screen.getByText('Data')).toBeInTheDocument();
+    expect(screen.getByText('Ações')).toBeInTheDocument();
+  });
 }); 
