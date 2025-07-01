@@ -344,4 +344,44 @@
     max-width: 400px;
     margin: 0 auto;
   }
+}
+
+/* --- AJUSTES MODO ESCURO PARA CALENDÁRIO --- */
+[data-theme="dark"] .react-calendar {
+  background: #23293a !important;
+  color: #e0e0e0 !important;
+  border: 1.5px solid #2d3544 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .react-calendar__tile {
+  background: transparent !important;
+  color: #e0e0e0 !important;
+  border-radius: 8px;
+}
+[data-theme="dark"] .react-calendar__tile--active,
+[data-theme="dark"] .react-calendar__tile--now {
+  background: #0066cc !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .react-calendar__tile--hasActive {
+  background: #338fff !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .react-calendar__month-view__days__day--weekend {
+  color: #ff7675 !important;
+}
+[data-theme="dark"] .react-calendar__navigation button {
+  background: transparent !important;
+  color: #e0e0e0 !important;
+}
+[data-theme="dark"] .react-calendar__navigation button:disabled {
+  color: #888 !important;
+}
+[data-theme="dark"] .react-calendar__month-view__weekdays__weekday {
+  color: #e0e0e0 !important;
+  border-bottom: 1px dotted #338fff;
+}
+[data-theme="dark"] .calendar-lancamento-item {
+  background: #00b894 !important;
+  color: #fff !important;
 } 

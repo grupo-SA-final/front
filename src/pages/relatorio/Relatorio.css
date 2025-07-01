@@ -194,4 +194,65 @@
     width: 100%;
     margin-right: 0;
   }
+}
+
+/* --- AJUSTES MODO ESCURO --- */
+[data-theme="dark"] .relatorio-filtros {
+  background: #23293a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  border: 1px solid #2d3544;
+}
+
+[data-theme="dark"] .relatorio-filtros input[type="date"],
+[data-theme="dark"] .relatorio-filtros select,
+[data-theme="dark"] .relatorio-filtros input[type="text"] {
+  background: #1a1f2c;
+  color: #e0e0e0;
+  border: 1px solid #2d3544;
+}
+
+[data-theme="dark"] .relatorio-filtros input[type="date"]::placeholder,
+[data-theme="dark"] .relatorio-filtros input[type="text"]::placeholder {
+  color: #b0b6c3;
+}
+
+[data-theme="dark"] .relatorio-btn-exportar {
+  background: #0066cc;
+  color: #fff;
+  border: none;
+}
+[data-theme="dark"] .relatorio-btn-exportar:hover {
+  background: #338fff;
+}
+
+[data-theme="dark"] .relatorio-card.resumo {
+  background: #23293a;
+  color: #e0e0e0;
+  border-left-width: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .relatorio-card.resumo strong {
+  color: #fff;
+}
+
+[data-theme="dark"] .relatorio-tabela-wrapper {
+  background: #23293a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .relatorio-tabela th {
+  background: #0066cc;
+  color: #fff;
+}
+[data-theme="dark"] .relatorio-tabela td {
+  color: #e0e0e0;
+}
+[data-theme="dark"] .relatorio-tabela tr:nth-child(even) {
+  background: #1a1f2c;
+}
+[data-theme="dark"] .relatorio-tabela tr:hover {
+  background: #2d3544;
+}
+
+[data-theme="dark"] .relatorio-filtro-item label {
+  color: #7abaff;
 } 
