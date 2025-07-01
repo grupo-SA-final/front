@@ -7,6 +7,7 @@ import withReactContent from "sweetalert2-react-content";
 import ReactDOM from "react-dom/client";
 import "./Usuario.css";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 registerLocale("pt", pt);
 
@@ -23,6 +24,9 @@ const FormAlterarSenha = ({ onClose, userId }) => {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showSenhaAtual, setShowSenhaAtual] = useState(false);
+  const [showNovaSenha, setShowNovaSenha] = useState(false);
+  const [showConfirmarSenha, setShowConfirmarSenha] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,36 +57,57 @@ const FormAlterarSenha = ({ onClose, userId }) => {
       style={{ maxWidth: "400px" }}
     >
       <h2 style={{ marginBottom: "1rem" }}>Alterar Senha</h2>
-      <input
-        type="password"
-        placeholder="Senha Atual"
-        value={senhaAtual}
-        onChange={(e) => setSenhaAtual(e.target.value)}
-        required
-        className="usuario-input"
-        style={{ marginBottom: "1rem" }}
-        disabled={loading}
-      />
-      <input
-        type="password"
-        placeholder="Nova Senha"
-        value={novaSenha}
-        onChange={(e) => setNovaSenha(e.target.value)}
-        required
-        className="usuario-input"
-        style={{ marginBottom: "1rem" }}
-        disabled={loading}
-      />
-      <input
-        type="password"
-        placeholder="Confirmar Nova Senha"
-        value={confirmarSenha}
-        onChange={(e) => setConfirmarSenha(e.target.value)}
-        required
-        className="usuario-input"
-        style={{ marginBottom: "1rem" }}
-        disabled={loading}
-      />
+      <div className="campo-senha-olho">
+        <input
+          type={showSenhaAtual ? 'text' : 'password'}
+          placeholder="Senha Atual"
+          value={senhaAtual}
+          onChange={(e) => setSenhaAtual(e.target.value)}
+          required
+          className="usuario-input"
+          disabled={loading}
+        />
+        <span
+          onClick={() => setShowSenhaAtual((v) => !v)}
+          className="icone-olho"
+        >
+          {showSenhaAtual ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
+      <div className="campo-senha-olho">
+        <input
+          type={showNovaSenha ? 'text' : 'password'}
+          placeholder="Nova Senha"
+          value={novaSenha}
+          onChange={(e) => setNovaSenha(e.target.value)}
+          required
+          className="usuario-input"
+          disabled={loading}
+        />
+        <span
+          onClick={() => setShowNovaSenha((v) => !v)}
+          className="icone-olho"
+        >
+          {showNovaSenha ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
+      <div className="campo-senha-olho">
+        <input
+          type={showConfirmarSenha ? 'text' : 'password'}
+          placeholder="Confirmar Nova Senha"
+          value={confirmarSenha}
+          onChange={(e) => setConfirmarSenha(e.target.value)}
+          required
+          className="usuario-input"
+          disabled={loading}
+        />
+        <span
+          onClick={() => setShowConfirmarSenha((v) => !v)}
+          className="icone-olho"
+        >
+          {showConfirmarSenha ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
       {erro && <p style={{ color: "red", marginBottom: "1rem" }}>{erro}</p>}
       <div style={{ display: "flex", justifyContent: "flex-end", gap: "1rem" }}>
         <button

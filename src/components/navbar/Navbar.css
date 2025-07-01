@@ -177,4 +177,26 @@
     width: 100%;
     max-width: 300px;
   }
+}
+
+/* Ajuste para campos de senha com ícone de olho no modal de cadastro */
+.campo-senha-olho {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.campo-senha-olho input {
+  width: 100%;
+  padding-right: 38px;
+}
+.campo-senha-olho .icone-olho {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 1.15rem;
+  z-index: 2;
 } 

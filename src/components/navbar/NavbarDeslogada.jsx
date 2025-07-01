@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import ReactDOM from 'react-dom/client';
 import './Navbar.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const MySwal = withReactContent(Swal);
 
@@ -18,6 +19,8 @@ const CadastroForm = ({ onClose }) => {
   });
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showSenha, setShowSenha] = useState(false);
+  const [showConfirmarSenha, setShowConfirmarSenha] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,8 +68,40 @@ const CadastroForm = ({ onClose }) => {
       <h2 style={{ marginBottom: '1rem' }}>Cadastro</h2>
       <input type="text" name="nome" placeholder="Nome" value={formData.nome} onChange={handleChange} required className="usuario-input" style={{ marginBottom: '1rem' }} />
       <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required className="usuario-input" style={{ marginBottom: '1rem' }} />
-      <input type="password" name="senha" placeholder="Senha" value={formData.senha} onChange={handleChange} required className="usuario-input" style={{ marginBottom: '1rem' }} />
-      <input type="password" name="confirmarSenha" placeholder="Confirmar Senha" value={formData.confirmarSenha} onChange={handleChange} required className="usuario-input" style={{ marginBottom: '1rem' }} />
+      <div className="campo-senha-olho">
+        <input
+          type={showSenha ? 'text' : 'password'}
+          name="senha"
+          placeholder="Senha"
+          value={formData.senha}
+          onChange={handleChange}
+          required
+          className="usuario-input"
+        />
+        <span
+          onClick={() => setShowSenha((v) => !v)}
+          className="icone-olho"
+        >
+          {showSenha ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
+      <div className="campo-senha-olho">
+        <input
+          type={showConfirmarSenha ? 'text' : 'password'}
+          name="confirmarSenha"
+          placeholder="Confirmar Senha"
+          value={formData.confirmarSenha}
+          onChange={handleChange}
+          required
+          className="usuario-input"
+        />
+        <span
+          onClick={() => setShowConfirmarSenha((v) => !v)}
+          className="icone-olho"
+        >
+          {showConfirmarSenha ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
       <input type="text" name="telefone" placeholder="Telefone" value={formData.telefone} onChange={handleChange} className="usuario-input" style={{ marginBottom: '1rem' }} />
       <input type="text" name="documento" placeholder="Documento" value={formData.documento} onChange={handleChange} className="usuario-input" style={{ marginBottom: '1rem' }} />
       <input type="date" name="dataNascimento" placeholder="Data de Nascimento" value={formData.dataNascimento} onChange={handleChange} className="usuario-input" style={{ marginBottom: '1rem' }} />
